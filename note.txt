@@ -1,0 +1,10 @@
+1.hibernate约束从哪找
+引入jar包后，hibernate-core-5.0.7.Final.jar---->	org.hibernate
+
+
+
+
+
+--------------------错误记录----------------------------
+1.Access denied for user 'cofe'@'localhost' (using password: YES)
+用没有访问权限(密码错误、数据库名错误等)
