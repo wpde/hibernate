@@ -1,6 +1,11 @@
 1.hibernate约束从哪找
 引入jar包后，hibernate-core-5.0.7.Final.jar---->	org.hibernate
 
+2.hibernate核心API
+	configuration对象：加载映射文件，创建sessionFactory对象
+	sessionFactory对象：数据存储源代理，创建session对象
+	session对象：数据库连接对象，不是线程安全的
+		get()方法与load()方法区别？
 
 
 
@@ -8,3 +13,6 @@
 --------------------错误记录----------------------------
 1.Access denied for user 'cofe'@'localhost' (using password: YES)
 用没有访问权限(密码错误、数据库名错误等)
+
+2.org.hibernate.TypeMismatchException
+类型转换异常如：get(class,1) get(class,Long(1));
