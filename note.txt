@@ -1,3 +1,7 @@
+hibernate优化手段
+1.缓存
+2.抓取策略
+
 1.hibernate约束从哪找
 引入jar包后，hibernate-core-5.0.7.Final.jar---->	org.hibernate
 
@@ -6,6 +10,17 @@
 	sessionFactory对象：数据存储源代理，创建session对象
 	session对象：数据库连接对象，不是线程安全的
 		get()方法与load()方法区别？
+
+3.hibernate对象状态
+	瞬时：由new创建，尚未与hibernate的Session
+	持久：在数据库中有对应的记录，并拥有一个持久化标识（identifier）
+		对对象的修改操作将会保存到数据库中，无需执行update
+	托管：与持久（Persistent）对象关联的 Session 被关闭后
+
+4.缓存
+	一级缓存：session级别
+	二级缓存：sessionFactory级别，实际中被redis替代
+	
 
 
 
