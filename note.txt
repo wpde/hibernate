@@ -1,41 +1,54 @@
-hibernate�Ż��ֶ�
-1.����
-2.ץȡ����
+hibernate优化手段
+1.缓存
+2.抓取策略
 
-1.hibernateԼ��������
-����jar����hibernate-core-5.0.7.Final.jar---->	org.hibernate
+1.hibernate约束从哪找
+引入jar包后，hibernate-core-5.0.7.Final.jar---->	org.hibernate
 
-2.hibernate����API
-	configuration���󣺼���ӳ���ļ�������sessionFactory����
-	sessionFactory�������ݴ洢Դ����������session����
-	session�������ݿ����Ӷ��󣬲����̰߳�ȫ��
-		get()������load()��������
+2.hibernate核心API
+	configuration对象：加载映射文件，创建sessionFactory对象
+	sessionFactory对象：数据存储源代理，创建session对象
+	session对象：数据库连接对象，不是线程安全的
+		get()方法与load()方法区别？
 
-3.hibernate����״̬
-	˲ʱ����new��������δ��hibernate��Session
-	�־ã������ݿ����ж�Ӧ�ļ�¼����ӵ��һ���־û���ʶ��identifier��
-		�Զ�����޸Ĳ������ᱣ�浽���ݿ��У�����ִ��update
-	�йܣ���־ã�Persistent����������� Session ���رպ�
+3.hibernate对象状态
+	瞬时：由new创建，尚未与hibernate的Session
+	持久：在数据库中有对应的记录，并拥有一个持久化标识（identifier）
+		对对象的修改操作将会保存到数据库中，无需执行update
+	托管：与持久（Persistent）对象关联的 Session 被关闭后
 
-4.����
-	һ�����棺session����
-	�������棺sessionFactory����ʵ���б�redis���
-	
-5.��ѯ��ʽ
-	���󵼺�����������һ���Ѿ���ѯ���Ķ��󣬻��������Ķ���
-	OID:���ݶ���������ѯ��get load
-	QBC:Query By Criteria��������ѯ
+4.缓存
+	一级缓存：session级别
+	二级缓存：sessionFactory级别，实际中被redis替代
+
+5.级联关系
+	cascade：级联，“save-update”、“delate”
+	inverse：放弃外键维护权，“true”、“false”默认值
+		
+6.查询方式
+	对象导航检索：根据一个已经查询到的对象，获得其关联的对象
+	OID:根据对象主键查询，get load
+	QBC:Query By Criteria，条件查询
 	HQL:
 	SQL:
+
+7.抓取策略
+	概述：通过一个对象抓取到关联对象需要发送SQL语句，SQL语句如何发送，
+	发送成什么样格式通过策略进行配置
+	fetch:抓取策略，控制SQL语句格式
+			select：默认值，发送普通的select语句，查询关联对象
+			join：发送一条迫切左外连接查询关联对象
+			subselect：发送一条子查询查询其关联对象
+	lazy:延迟加载，控制查询关联对象的时候是否采用延迟
 	
 	
 
 
 
 
---------------------�����¼----------------------------
+--------------------错误记录----------------------------
 1.Access denied for user 'cofe'@'localhost' (using password: YES)
-��û�з���Ȩ��(����������ݿ��������)
+用没有访问权限(密码错误、数据库名错误等)
 
 2.org.hibernate.TypeMismatchException
-����ת���쳣�磺get(class,1) get(class,Long(1));
+类型转换异常如：get(class,1) get(class,Long(1));
