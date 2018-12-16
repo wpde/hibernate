@@ -21,6 +21,14 @@ hibernate优化手段
 	一级缓存：session级别
 	二级缓存：sessionFactory级别，实际中被redis替代
 	
+5.查询方式
+	对象导航检索：根据一个已经查询到的对象，获得其关联的对象
+	OID:根据对象主键查询，get load
+	QBC:Query By Criteria，条件查询
+	HQL:
+	SQL:
+	
+	
 
 
 

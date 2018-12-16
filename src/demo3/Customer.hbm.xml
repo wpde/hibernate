@@ -26,7 +26,7 @@
 				* cascade：级联
 				* inverse：放弃外键维护权。
 		-->
-		 <set name="linkMans" inverse="true">
+		 <set name="linkMans" cascade="save-update" >
 		 	<!-- key 多的一方外键名称 -->
 		 	<key column="lkm_cust_id"/>
 		 	<one-to-many class="demo3.LinkMan"/>
