@@ -34,7 +34,8 @@
 		
 		<!-- <mapping resource="demo1/Customer.hbm.xml"/>
 		<mapping resource="demo2/Customer.hbm.xml"/> -->
-		<mapping resource="demo3/Customer.hbm.xml"/>
-		<mapping resource="demo3/LinkMan.hbm.xml"/>
+		<!-- <mapping resource="demo3/Customer.hbm.xml"/> -->
+		<!-- <mapping resource="demo3/LinkMan.hbm.xml"/> -->
+		<mapping resource="demo5/Person.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

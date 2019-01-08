@@ -1,7 +1,14 @@
+-------------目录--------------
+demo1:环境搭建
+demo2:持久化类、主键生成策略、对象状态、缓存
+demo3:表关系
+demo4:查询方式、抓取策略
+demo5:继承关系的映射
+----------------------------
 hibernate优化手段
 1.缓存
 2.抓取策略
-
+----------------------------------------
 1.hibernate约束从哪找
 引入jar包后，hibernate-core-5.0.7.Final.jar---->	org.hibernate
 
@@ -9,7 +16,6 @@ hibernate优化手段
 	configuration对象：加载映射文件，创建sessionFactory对象
 	sessionFactory对象：数据存储源代理，创建session对象
 	session对象：数据库连接对象，不是线程安全的
-		get()方法与load()方法区别？
 
 3.hibernate对象状态
 	瞬时：由new创建，尚未与hibernate的Session
@@ -42,7 +48,18 @@ hibernate优化手段
 	lazy:延迟加载，控制查询关联对象的时候是否采用延迟
 	
 	
-
+-------------------问题------------------------------
+1.getCourrentSession()与openSession()的区别？
+	1. 采用getCurrentSession()创建的session会绑定到当前线程中(第一次调用时会创建一个Session实例，
+	如果该Session未关闭，后续多次获取的是同一个Session实例)，而采用openSession()创建的session
+	则不会(每次打开都是新的Session，所以多次获取的Session实例是不同的)。
+	2.采用getCurrentSession()创建的session在commit或rollback时会自动关闭，
+	而采用openSession()创建的session必须手动关闭
+	3.使用getCurrentSession时，需求配置：<property name="current_session_context_class">XXX</property>  
+2.如何调用原生 jdbc API？
+	调用 Session 的 doWork() 方法
+3.session的清理flush()与清空clear()有什么区别？
+4.get()与load()有什么区别？
 
 
 
@@ -52,3 +69,6 @@ hibernate优化手段
 
 2.org.hibernate.TypeMismatchException
 类型转换异常如：get(class,1) get(class,Long(1));
+
+3.Cannot use identity column key generation with <union-subclass>
+继承关系映射时，使用union-subclass方式，主键自增不能使用identity

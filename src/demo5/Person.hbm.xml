@@ -1,0 +1,41 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="demo5">
+	
+	<class name="Person" table="person">
+		<id name="id" column="id">
+			<generator class="increment"/>
+		</id>
+		
+		
+		<!-- 方式一：subclass -->
+		<!-- <discriminator column="role" type="string">
+		</discriminator>
+		<property name="age" column="age"/>
+		<property name="name" column="name"/>
+		<subclass name="Worker" discriminator-value="worker" >
+			<property name="job" column="job"/>
+			<property name="unit" column="unit"/>
+		</subclass> -->
+		
+		<!-- 方式二：joined-subclass -->
+		<property name="age" column="age"/>
+		<property name="name" column="name"/>
+		<joined-subclass name="Worker" table="joined_worker">
+			<key column="person_id"></key>
+			<property name="job" column="job"/>
+			<property name="unit" column="unit"/>
+		</joined-subclass>
+		
+		
+		<!-- 方式三：joined-subclass -->
+		<!-- <property name="age" column="age"/>
+		<property name="name" column="name"/>
+		<union-subclass name="Worker" table="union_worker">
+			<property name="job" column="job"/>
+			<property name="unit" column="unit"/>
+		</union-subclass> -->
+		
+	</class>
+</hibernate-mapping>
