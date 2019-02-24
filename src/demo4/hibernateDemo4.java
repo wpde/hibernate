@@ -27,6 +27,7 @@ public class hibernateDemo4 {
 		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		Customer customer = session.get(Customer.class, 1l);
 		System.out.println(customer.getLinkMans());
+		session.close();
 	}
 	
 	@Test

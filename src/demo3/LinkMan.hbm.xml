@@ -24,6 +24,6 @@
 				* class		:一的一方的类的全路径。
 				* column	:在多的一方的表的外键的名称。
 		 -->
-		<many-to-one cascade="save-update" name="customer" class="demo3.Customer" column="lkm_cust_id"/>
+		<many-to-one fetch="join" cascade="save-update" name="customer" class="demo3.Customer" column="lkm_cust_id"/>
 	</class>
 </hibernate-mapping>
