@@ -72,3 +72,4 @@ hibernate优化手段
 
 3.Cannot use identity column key generation with <union-subclass>
 继承关系映射时，使用union-subclass方式，主键自增不能使用identity
+哈哈哈哈
